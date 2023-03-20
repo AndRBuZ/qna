@@ -6,7 +6,7 @@ feature 'User can create question', %q{
   I'd like to be able to ask th question
 }do
 
-  given(:user) { User.create!(email: 'user@test.com', password: '12345678') }
+  given(:user) { create(:user) }
 
   describe 'Authenticated user' do
 
