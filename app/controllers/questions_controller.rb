@@ -6,11 +6,9 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
-  def show
-    puts @question
-  end
+  def show; end
 
-  def new;  end
+  def new; end
 
   def edit; end
 
@@ -34,8 +32,11 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path, notice: 'Your question was successfully deleted.'
+    if @question.destroy
+      redirect_to questions_path, notice: 'Your question was successfully deleted.'
+    else
+      redirect_to question_path, notice: 'Question delete Error'
+    end
   end
 
   private

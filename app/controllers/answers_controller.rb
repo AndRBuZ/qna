@@ -11,7 +11,6 @@ class AnswersController < ApplicationController
       redirect_to question_path(@question), notice: "Your answer successfully created."
     else
       flash[:errors] = @answer.errors
-      @errors = @answer.errors
       redirect_to question_path(@question)
     end
   end

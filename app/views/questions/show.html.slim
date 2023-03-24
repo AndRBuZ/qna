@@ -6,3 +6,5 @@ p= @question.body
 = render @question.answers
 = flash[:errors]
 = render 'answers/form'
+
+= link_to 'Back', questions_path
