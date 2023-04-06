@@ -33,6 +33,9 @@ gem 'slim-rails', '~> 3.6.1'
 # Use devise for authenticate user
 gem 'devise'
 
+# jquery
+gem 'jquery-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -59,6 +62,7 @@ group :test do
   gem 'webdrivers'
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'launchy'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
