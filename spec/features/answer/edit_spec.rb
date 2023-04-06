@@ -28,10 +28,12 @@ feature 'User can edit his answer' do
     scenario 'edits his answer with errors' do
       click_on 'Edit'
 
-      fill_in 'Your answer', with: ' '
-      click_on 'Save'
+      within '.answers' do
+        fill_in 'Your answer', with: ''
+        click_on 'Save'
 
-      expect(page).to have_content "Body can't be blank"
+        expect(page).to have_content "Body can't be blank"
+      end
     end
   end
 

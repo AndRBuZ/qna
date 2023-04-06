@@ -8,4 +8,5 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-require("answers/answers")
+require("answers/update")
+require("question/update")

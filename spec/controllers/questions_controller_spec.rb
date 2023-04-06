@@ -4,7 +4,6 @@ RSpec.describe QuestionsController, type: :controller do
   let(:question) { create(:question) }
   let(:user) { create(:user) }
 
-
   describe 'GET #index' do
     let(:questions) { create_list(:question, 3) }
 
@@ -62,7 +61,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     context 'with invalid attributes' do
-      it 'does not save the question' do        
+      it 'does not save the question' do
         expect { post :create, params: { question: attributes_for(:question, :invalid) } }.to_not change(Question, :count)
       end
 
@@ -77,43 +76,36 @@ RSpec.describe QuestionsController, type: :controller do
     before { login(user) }
 
     context 'with valid attributes' do
-      it 'assigns the requested question to @question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
-        expect(assigns(:question)).to eq question
-      end
-
-      it 'change questions attributes' do
-        patch :update, params: { id: question, question: { title: 'new title', body: 'new body' } }
+      it 'changes question attributes' do
+        patch :update, params: { id: question, question: { title: 'new title', body: 'new body' }, format: :js }
         question.reload
-
         expect(question.title).to eq 'new title'
         expect(question.body).to eq 'new body'
       end
 
-      it 'redirects to updated question' do
-        patch :update, params: { id: question, question: attributes_for(:question) }
-        expect(response).to redirect_to question
+      it 'renders update view' do
+        patch :update, params: { id: question, question: { title: 'new title', body: 'new body' }, format: :js }
+        expect(response).to render_template :update
       end
     end
 
     context 'with invalid attributes' do
-      before { patch :update, params: { id: question, question: attributes_for(:question, :invalid) } }
-
-      it 'does not change question' do
-        question.reload
-
-        expect(question.body).to eq 'MyQuestion'
+      it 'does not change question attributes' do
+        expect do
+          patch :update, params: { id: question, question: attributes_for(:question, :invalid), format: :js }
+        end.to_not change(question, :title)
       end
 
-      it 're-render edit view' do
-        expect(response).to render_template :edit
+      it 'renders update view' do
+        patch :update, params: { id: question, question: attributes_for(:question, :invalid), format: :js }
+        expect(response).to render_template :update
       end
     end
   end
 
   describe 'DELETE #destroy' do
     before { login(user) }
-    
+
     let!(:question) { create(:question) }
 
     it 'deletes the question' do

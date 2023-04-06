@@ -1,2 +1,22 @@
-= link_to "#{question.title}", question_path(question)
-p= question.body
+- if controller.action_name == "index"
+  h3 = link_to question.title, question_path(question)
+- elsif controller.action_name == "show" || "update"
+  h1 = @question.title
+  h3 = @question.body
+
+  .question-errors
+     = render 'shared/errors', resource: @question
+
+  - if current_user&.author_of?(@question)
+    = link_to 'Delete question', question_path(@question), remote: true, method: :delete
+    = link_to 'Edit Question', '#', class: 'edit-question-link', data: { question_id: @question.id }
+
+  - if current_user&.author_of?(@question)
+    = form_with model: @question, class: 'hidden', html: { id: "edit-question-#{@question.id}" }, local: false do |f|
+      p 
+        = f.label :title
+        = f.text_field :title
+      p  
+        = f.label :body
+        = f.text_area :body
+        = f.submit "Save"

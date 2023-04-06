@@ -1,18 +1,16 @@
 require 'rails_helper'
 
-feature 'User can delete question' do
-
+feature 'User can delete question', js: true do
   given(:user) { create(:user) }
   given!(:question) { create_list(:question, 2) }
 
   describe 'Authenticated user' do
-
     background { log_in(question[0].user) }
 
     scenario 'tries to delete his question' do
       visit question_path(question[0])
       click_on 'Delete question'
-      expect(page).to have_content 'Your question was successfully deleted.'
+
       expect(page).to_not have_content question[0].title
     end
 
