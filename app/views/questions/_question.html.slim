@@ -3,6 +3,12 @@
 - elsif controller.action_name == "show" || "update"
   h1 = @question.title
   h3 = @question.body
+  - if @question.files.attached?
+    - @question.files.each do |file|
+          p.attachment id="file-#{file.id}"
+            = link_to file.filename.to_s, url_for(file)
+            - if current_user&.author_of?(@question)
+              = link_to ' Delete file', file_path(file), method: :delete, remote: true
 
   .question-errors
      = render 'shared/errors', resource: @question
@@ -19,4 +25,8 @@
       p  
         = f.label :body
         = f.text_area :body
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true, direct_upload: true
+      p  
         = f.submit "Save"
