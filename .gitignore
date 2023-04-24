@@ -29,6 +29,9 @@
 /config/master.key
 /config/database.yml
 
+# Ignore dotenv
+.env
+
 /public/packs
 /public/packs-test
 /node_modules
