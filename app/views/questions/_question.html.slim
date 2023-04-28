@@ -10,6 +10,13 @@
             - if current_user&.author_of?(@question)
               = link_to ' Delete file', file_path(file), method: :delete, remote: true
 
+  .links
+    - unless @question.links.blank?
+      p Links:
+      ul
+        - @question.links.each do |link|
+          li= link_to link.name, "#{link.url}", rel: 'noopener nofollow', target: '_blank'
+
   .question-errors
      = render 'shared/errors', resource: @question
 
