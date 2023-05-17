@@ -33,9 +33,6 @@ gem 'slim-rails', '~> 3.6.1'
 # Use devise for authenticate user
 gem 'devise'
 
-# jquery
-gem 'jquery-rails'
-
 # gem dotenv
 gem 'dotenv-rails'
 

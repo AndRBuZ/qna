@@ -5,6 +5,7 @@ feature 'User can edit his question' do
   given(:second_user) { create(:user) }
   given!(:question) { create(:question) }
   given!(:answer) { create(:answer, user: user, question: question) }
+  given!(:github_url) { 'https://github.com' }
 
   describe 'Authenticated user', js: true do
     background do
@@ -61,6 +62,20 @@ feature 'User can edit his question' do
           expect(page).to_not have_link 'rails_helper.rb'
           expect(page).to have_link 'spec_helper.rb'
         end
+      end
+    end
+
+    scenario 'tries to add link to his question' do
+      within '.question' do
+        click_on 'Edit Question'
+        click_on 'add link'
+
+        fill_in 'Link name', with: 'Github'
+        fill_in 'Url', with: github_url
+
+        click_on 'Save'
+
+        expect(page).to have_link 'Github', href: github_url
       end
     end
   end

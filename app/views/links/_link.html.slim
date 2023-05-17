@@ -1,0 +1,14 @@
+li= link_to link.name, "#{link.url}", rel: 'noopener nofollow', target: '_blank'
+- if link.gist?
+  javascript:
+    gistClient
+      .setToken("#{ENV['TOKEN']}")
+      .getOneById("#{link.gist_id}")
+      .then(response => {
+        for (let file in response.files) {
+          let currentLink = document.querySelector('[id="link-#{link.id}"]')
+          currentLink.innerText = response.files[file].content
+        }
+      }).catch(err => {
+        console.log(err)
+      })

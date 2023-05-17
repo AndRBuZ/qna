@@ -1,4 +1,5 @@
-= render 'shared/errors', resource: @question
+.question-errors
+  = render 'shared/errors', resource: @question
 
 = form_with model: @question, local: true do |f|
   p
@@ -12,13 +13,9 @@
     = f.file_field :files, multiple: true, direct_upload: true
 
   p Links:
-  p
+  #question_links
     = f.fields_for :links do |l|
-      p
-        = l.label :name, 'Link name'
-        = l.text_field :name
-      p
-        = l.label :url
-        = l.text_field :url
+    .links
+      = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
   p
     = f.submit 'Ask'

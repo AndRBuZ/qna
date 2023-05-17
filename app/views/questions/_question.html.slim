@@ -3,22 +3,26 @@
 - elsif controller.action_name == "show" || "update"
   h1 = @question.title
   h3 = @question.body
+  
   - if @question.files.attached?
     - @question.files.each do |file|
-          p.attachment id="file-#{file.id}"
-            = link_to file.filename.to_s, url_for(file)
-            - if current_user&.author_of?(@question)
-              = link_to ' Delete file', file_path(file), method: :delete, remote: true
+      p.attachment id="file-#{file.id}"
+        = link_to file.filename.to_s, url_for(file)
+        - if current_user&.author_of?(@question)
+          = link_to ' Delete file', file_path(file), remote: true, method: :delete
 
   .links
     - unless @question.links.blank?
       p Links:
       ul
         - @question.links.each do |link|
-          li= link_to link.name, "#{link.url}", rel: 'noopener nofollow', target: '_blank'
+          .link id="link-#{link.id}"
+            = render link
+            - if current_user&.author_of?(@question)
+              = link_to 'Delete link', link_path(link), remote: true, method: :delete
 
   .question-errors
-     = render 'shared/errors', resource: @question
+    = render 'shared/errors', resource: @question
 
   - if current_user&.author_of?(@question)
     = link_to 'Delete question', question_path(@question), remote: true, method: :delete
@@ -35,5 +39,10 @@
       p
         = f.label :files
         = f.file_field :files, multiple: true, direct_upload: true
+      p Links:
+      #question_links
+        = f.fields_for :links do |l|
+        .links
+          = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
       p  
         = f.submit "Save"
