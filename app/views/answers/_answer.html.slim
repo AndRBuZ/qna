@@ -8,8 +8,16 @@ div class=("answer-#{answer.id}")
             = link_to file.filename.to_s, url_for(file)
             - if current_user&.author_of?(answer)
               = link_to ' Delete file', file_path(file), method: :delete, remote: true
-
-
+    
+    .links
+    - unless answer.links.blank?
+      p Links:
+      ul
+        - answer.links.each do |link|
+          .link id="link-#{link.id}"
+            = render link
+            - if current_user&.author_of?(answer)
+              = link_to 'Delete link', link_path(link), remote: true, method: :delete
 
     - if current_user&.author_of?(answer)
       = link_to 'Delete answer', answer_path(answer), remote: true, method: :delete
@@ -26,5 +34,10 @@ div class=("answer-#{answer.id}")
         p
          = f.label :files
          = f.file_field :files, multiple: true, direct_upload: true
+        p Links:
+        #answer_links
+          = f.fields_for :links do |l|
+          .links
+            = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
         p
           = f.submit "Save"

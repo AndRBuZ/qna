@@ -33,14 +33,14 @@ gem 'slim-rails', '~> 3.6.1'
 # Use devise for authenticate user
 gem 'devise'
 
-# jquery
-gem 'jquery-rails'
-
 # gem dotenv
 gem 'dotenv-rails'
 
 # for yandex cloud
 gem "aws-sdk-s3", require: false
+
+# for nested form
+gem 'cocoon'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

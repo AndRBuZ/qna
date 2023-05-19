@@ -1,0 +1,8 @@
+h1 Awards:
+- unless @awards.empty?
+  - @awards.each do |award|
+    p= "Question: #{award.question.title}"
+    p= "Award: #{award.title}"
+    p= image_tag award.image, size: "50"
+- else
+  h3= 'You have not awards, yet'
