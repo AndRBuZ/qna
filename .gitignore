@@ -32,6 +32,8 @@
 # Ignore dotenv
 .env
 
+.solargraph.yml
+
 /public/packs
 /public/packs-test
 /node_modules

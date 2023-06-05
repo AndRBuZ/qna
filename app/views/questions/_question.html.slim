@@ -21,6 +21,8 @@
             - if current_user&.author_of?(@question)
               = link_to 'Delete link', link_path(link), remote: true, method: :delete
 
+  = render partial: 'shared/vote', locals: { votable: @question }
+
   .question-errors
     = render 'shared/errors', resource: @question
 

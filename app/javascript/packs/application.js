@@ -14,3 +14,4 @@ window.gistClient = gistClient
 require("@nathanvda/cocoon")
 require("answers/update")
 require("question/update")
+require("votes/vote")

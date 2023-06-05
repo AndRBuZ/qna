@@ -19,9 +19,12 @@ div class=("answer-#{answer.id}")
             - if current_user&.author_of?(answer)
               = link_to 'Delete link', link_path(link), remote: true, method: :delete
 
+    = render partial: 'shared/vote', locals: { votable: answer }
+
     - if current_user&.author_of?(answer)
-      = link_to 'Delete answer', answer_path(answer), remote: true, method: :delete
-      = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+      p
+        = link_to 'Delete answer | ', answer_path(answer), remote: true, method: :delete
+        = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
 
     -if current_user&.author_of?(answer.question) && !answer.best?
       = link_to 'Best answer', best_answer_path(answer), remote: :true, method: :patch, data: { answer_id: answer.id }

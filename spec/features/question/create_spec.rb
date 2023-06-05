@@ -4,12 +4,10 @@ feature 'User can create question', %q{
   In order to get answer from a community
   As an authenticated user
   I'd like to be able to ask th question
-}do
-
+} do
   given(:user) { create(:user) }
 
   describe 'Authenticated user' do
-
     background do
       log_in(user)
 
