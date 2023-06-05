@@ -14,10 +14,8 @@ feature 'User can add award to his question'do
     end
 
     scenario 'asks a question with added award' do
-      within '.award' do
-        fill_in 'Award title', with: 'Award'
-        attach_file 'Image', "#{Rails.root}/spec/images/golden-star.png"
-      end
+      fill_in 'Award title', with: 'Award'
+      attach_file 'Image', "#{Rails.root}/spec/images/golden-star.png"
       click_on 'Ask'
 
       expect(page).to have_content 'Your question successfully created.'
@@ -26,9 +24,7 @@ feature 'User can add award to his question'do
     end
 
     scenario 'asks a question with errors' do
-      within '.award' do
-        attach_file 'Image', "#{Rails.root}/spec/images/golden-star.png"
-      end
+      attach_file 'Image', "#{Rails.root}/spec/images/golden-star.png"
       click_on 'Ask'
 
       expect(page).to have_content "Award title can't be blank"
