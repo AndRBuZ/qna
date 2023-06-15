@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create({ channel: "QuestionsChannel" },
+consumer.subscriptions.create("QuestionsChannel",
   {
     connected() {
       this.perform('follow')
