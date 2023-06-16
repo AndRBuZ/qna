@@ -46,6 +46,8 @@ default: &default
     - .gif
     - .jpeg
     - .jpg
+    - .handlebars
+    - .hbs
 
 development:
   <<: *default

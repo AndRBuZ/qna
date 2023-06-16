@@ -7,5 +7,7 @@ environment.plugins.prepend('Provide',
     jQuery: 'jquery/src/jquery'
   })
 )
+const handlebars = require('./loaders/handlebars')
 
+environment.loaders.prepend('handlebars', handlebars)
 module.exports = environment

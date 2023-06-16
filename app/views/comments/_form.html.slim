@@ -1,0 +1,12 @@
+- if current_user.present?
+  .comments-form
+
+    .comment-errors
+      = render 'shared/errors', resource: @comment
+
+    = form_with model: [commentable, Comment.new], html: { id: "new-#{commentable.class.to_s.downcase}-comment-#{commentable.id}" }, local: false do |f|
+      p
+        = f.label :body, 'Your comment:'
+      p
+        = f.text_area :body
+        = f.submit 'Send comment'

@@ -1,0 +1,11 @@
+$('.comment-errors').html('<%= render 'shared/errors', resource: @comment %>')
+
+<% if @commentable.is_a?(Question) %>
+  $('.question .comments').append('<%= j render partial: @comment, locals: { comment: @comment } %>')
+  $('.question #comment_body').val('')
+<% end %>
+
+<% if @commentable.is_a?(Answer) %>
+  $('.answers .answer-' + <%= @commentable.id %> + ' .comments').append('<%= j render partial: @comment, locals: { comment: @comment } %>')
+  $('.answers .answer-' + <%= @commentable.id %> + ' #comment_body').val('')
+<% end %>

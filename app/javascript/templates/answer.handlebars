@@ -1,0 +1,26 @@
+<div class="answer-{{answer_id}}">
+  <p>{{answer_body}}</p>
+  <p>
+  {{#each answer_files}}
+  <div class='attachment' id="file-{{this.id}}">
+    <a href='{{this.url}}' rel='noopener nofollow' target='_blank'>{{this.name}}</a>
+  </div>
+  {{/each}}
+  </p>
+  <div class='links'>
+    <p>Links: </p>
+    {{#each answer_links}}
+    <div class="link" id="link-{{this.id}}">
+      <ul><a href='{{this.url}}' rel='noopener nofollow' target='_blank'>{{this.name}}</a></ul>
+    </div>
+    {{/each}}
+  </div>
+  <div class='votes'>
+    {{#if user}}
+    <a data-method="post" data-remote="true" href='/answers/{{answer_id}}/upvote'>Upvote | </a>
+    <a data-method="post" data-remote="true" href='/answers/{{answer_id}}/downvote'>Downvote</a>
+    {{/if}}
+    <p>Rating: </p>
+    <div class='rating'>{{answer_rating}}</div>
+  </div>
+</div>
