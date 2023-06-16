@@ -45,11 +45,11 @@ class AnswersController < ApplicationController
     return if @answer.errors.any?
 
     answer = {
-      answer_id: @answer.id, 
-      user_id: @answer.user_id, 
-      answer_body: @answer.body, 
-      links: @answer.links.map { |link| { name: link.name, id: link.id, url: link.url }},
-      files: @answer.files.map { |file| { url: file.url, name: file.filename, id: file.id }},
+      answer_id: @answer.id,
+      user_id: @answer.user_id,
+      answer_body: @answer.body,
+      links: @answer.links.map { |link| { name: link.name, id: link.id, url: link.url } },
+      files: @answer.files.map { |file| { url: file.url, name: file.filename, id: file.id } },
       votes: @answer.result_rating
     }
 

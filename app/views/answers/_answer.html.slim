@@ -29,6 +29,11 @@
     -if current_user&.author_of?(answer.question) && !answer.best?
       = link_to 'Best answer', best_answer_path(answer), remote: :true, method: :patch, data: { answer_id: answer.id }
 
+    = render partial: 'comments/form', locals: { commentable: answer }
+
+    .comments
+      = render answer.comments
+
     - if current_user&.author_of?(answer)
       = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" }, local: false do |f|
         p

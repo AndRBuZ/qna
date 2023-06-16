@@ -44,3 +44,8 @@ h3 = @question.body
         = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
     p  
       = f.submit "Save"
+
+= render partial: 'comments/form', locals: { commentable: @question }
+
+.comments
+  = render @question.comments
