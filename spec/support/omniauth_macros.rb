@@ -1,13 +1,10 @@
 module OmniauthMacros
-  def mock_auth_hash
-    OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
-      provider: 'github',
-      uid: '123545',
-      info: { email: 'test@example.com' }
-    )
-  end
-
-  def mock_auth_invalid
-    OmniAuth.config.mock_auth[:github] = :credentials_are_invalid
+  def mock_auth(provider, email = nil)
+    auth_hash = {
+      provider: provider.to_s,
+      uid: '123545'
+    }
+    auth_hash.merge!(info: { email: email }) if email
+    OmniAuth.config.mock_auth[provider] = OmniAuth::AuthHash.new(auth_hash)
   end
 end

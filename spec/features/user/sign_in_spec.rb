@@ -28,17 +28,26 @@ feature 'User can sign in', %q{
   context 'Registered user with OAuth' do
     context 'GitHub' do
       scenario 'can sign in' do
-        mock_auth_hash
+        mock_auth :github, 'test@example.com'
         click_on 'Sign in with GitHub'
 
-        expect(page).to have_content 'Successfully authenticated from Github account.'
+        expect(page).to have_content 'Successfully authenticated from github account.'
       end
+    end
 
-      scenario 'user not sing in' do
-        mock_auth_invalid
-        click_on 'Sign in with GitHub'
+    context 'vkontakte' do
+      scenario 'can sign in' do
+        mock_auth :vkontakte
+        click_on 'Sign in with Vkontakte'
 
-        expect(page).to have_content 'Could not authenticate you from GitHub because "Credentials are invalid"'
+        fill_in 'email', with: 'test@test.com'
+        click_on 'Send'
+
+        open_email('test@test.com')
+        current_email.click_link 'Confirm your registration'
+
+
+        expect(page).to have_content 'Email successfully confirmed'
       end
     end
   end

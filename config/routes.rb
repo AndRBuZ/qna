@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :authorizations, only: [:create, :new] do
+    get 'email_confirmation/:confirmation_token', action: :email_confirmation, as: :email_confirmation
+  end
+
   resources :files, only: :destroy
   resources :links, only: :destroy
   resources :awards, only: :index
