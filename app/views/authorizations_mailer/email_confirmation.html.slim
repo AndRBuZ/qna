@@ -1,0 +1,2 @@
+p Welcome #{@email}
+p #{ link_to 'Confirm your registration', authorization_email_confirmation_url(authorization_id: @authorization_id, confirmation_token: @token) }
