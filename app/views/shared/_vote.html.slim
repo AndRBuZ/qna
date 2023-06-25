@@ -1,5 +1,5 @@
 .votes
-  - if user_signed_in? && !current_user&.author_of?(votable)
+  - if can?(:upvote && :downvote, votable)
     = link_to 'Upvote | ', polymorphic_path([:upvote, votable]), class: 'upvote', method: :post, remote: true
     = link_to 'Downvote', polymorphic_path([:downvote, votable]), class: 'downvote', method: :post, remote: true
   p Rating:
