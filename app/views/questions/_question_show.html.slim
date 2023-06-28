@@ -5,7 +5,7 @@ h3 = @question.body
   - @question.files.each do |file|
     p.attachment id="file-#{file.id}"
       = link_to file.filename.to_s, url_for(file)
-      - if current_user&.author_of?(@question)
+      - if can?(:update, @question)
         = link_to ' Delete file', file_path(file), remote: true, method: :delete
 
 .links
@@ -15,18 +15,18 @@ h3 = @question.body
       - @question.links.each do |link|
         .link id="link-#{link.id}"
           = render link
-          - if current_user&.author_of?(@question)
+          - if can?(:update, @question)
             = link_to 'Delete link', link_path(link), remote: true, method: :delete
 
 = render partial: 'shared/vote', locals: { votable: @question }
 
 .question-errors
   = render 'shared/errors', resource: @question
-- if current_user&.author_of?(@question)
+- if can?(:update && :destroy, @question)
   = link_to 'Delete question', question_path(@question), remote: true, method: :delete
   = link_to 'Edit Question', '#', class: 'edit-question-link', data: { question_id: @question.id }
 
-- if current_user&.author_of?(@question)
+- if can?(:update, @question)
   = form_with model: @question, class: 'hidden', html: { id: "edit-question-#{@question.id}" }, local: false do |f|
     p 
       = f.label :title
