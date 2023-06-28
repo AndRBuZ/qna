@@ -20,7 +20,7 @@ class Ability
   end
 
   def admin_abilities
-    can :mange, :all
+    can :manage, :all
   end
 
   def user_abilities

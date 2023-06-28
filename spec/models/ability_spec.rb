@@ -16,7 +16,7 @@ describe Ability do
   context 'for admin' do
     let(:user) { create :user, admin: true }
 
-    it { should be_able_to :mange, :all }
+    it { should be_able_to :manage, :all }
   end
 
   context 'for user' do
