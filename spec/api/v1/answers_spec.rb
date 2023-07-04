@@ -31,7 +31,7 @@ describe 'Answers API', type: :request do
     let(:user) { create(:user) }
     let(:access_token) { create(:access_token) }
     let(:file1) { "#{Rails.root}/spec/rails_helper.rb" }
-    # let(:file2) { ("#{Rails.root}/spec/spec_helper.rb", 'text/plain') }
+    let(:file2) { "#{Rails.root}/spec/spec_helper.rb" }
     let!(:question) { create(:question) }
     let!(:answer) { create(:answer, question: question, user: user) }
     let!(:comments) { create_list(:comment, 3, commentable: answer) }
@@ -43,7 +43,8 @@ describe 'Answers API', type: :request do
     end
 
     before do
-      fixture_file_upload(file1)
+      answer.files.attach(io: File.open(file1), filename: 'rails_helper.rb')
+      answer.files.attach(io: File.open(file2), filename: 'spec_helper.rb')
     end
 
     context 'authorized' do

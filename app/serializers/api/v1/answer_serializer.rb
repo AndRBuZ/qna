@@ -1,4 +1,6 @@
 class Api::V1::AnswerSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+
   attributes :id, :body, :best, :created_at, :updated_at, :files
   has_many :links
   has_many :comments
@@ -6,7 +8,7 @@ class Api::V1::AnswerSerializer < ActiveModel::Serializer
   def files
     files = []
     object.files.each do |file|
-      files << file.url
+      files << url_for(file)
     end
     files
   end

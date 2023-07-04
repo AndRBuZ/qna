@@ -21,7 +21,6 @@ describe 'Questions API', type: :request do
 
       before { get api_path, params: { access_token: access_token.token }, headers: headers }
 
-
       it 'returns list of questions' do
         expect(json['questions'].size).to eq 2
       end
@@ -39,7 +38,7 @@ describe 'Questions API', type: :request do
     let(:api_path) { "/api/v1/questions/#{question.id}" }
 
     before do
-      question.files.attach(io: File.open(file1), filename: 'file_helper.rb')
+      question.files.attach(io: File.open(file1), filename: 'rails_helper.rb')
       question.files.attach(io: File.open(file2), filename: 'spec_helper.rb')
     end
 
