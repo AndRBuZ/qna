@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
     ActionCable.server.broadcast(
       "comments_#{question_id}",
       ApplicationController.render(
-        json: comment
+        json: comment, scope: nil
       )
     )
   end

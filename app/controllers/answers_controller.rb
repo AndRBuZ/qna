@@ -58,7 +58,7 @@ class AnswersController < ApplicationController
     ActionCable.server.broadcast(
       "questions_#{@question.id}_answers",
       ApplicationController.render(
-        json: answer
+        json: answer, scope: nil
       )
     )
   end

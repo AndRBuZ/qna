@@ -30,5 +30,7 @@ class Ability
     can [:upvote, :downvote], [Question, Answer]
     cannot [:upvote, :downvote], [Question, Answer], user_id: user.id
     can :best, Answer, question: { user_id: user.id }
+    can :me, :profile
+    can :index, :profile
   end
 end
