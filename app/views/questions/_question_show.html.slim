@@ -1,5 +1,7 @@
 h1 = @question.title
 h3 = @question.body
+
+= render 'subscription'
   
 - if @question.files.attached?
   - @question.files.each do |file|
