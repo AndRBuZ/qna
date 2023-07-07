@@ -1,0 +1,6 @@
+.question-subscription
+  - if can?(:create && :destroy, Subscription)
+    - if @subscription.present?
+      = link_to 'unsubscribe', question_subscription_path(question_id: @question.id, id: @subscription.id), class: 'unsubscribe-link', method: :delete, remote: true
+    - else
+      = link_to 'subscribe', question_subscriptions_path(@question), class: 'subscribe-link', method: :post, remote: true

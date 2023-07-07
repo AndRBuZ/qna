@@ -13,6 +13,7 @@ class AnswersController < ApplicationController
     @answer = @question.answers.new(answer_params)
     @answer.user = current_user
     @answer.save
+    SubscriberNotificationJob.perform_later(@question)
   end
 
   def update
