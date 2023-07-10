@@ -1,0 +1,19 @@
+.search-result
+  - if @result.blank?
+    p= 'Nothing found'
+  - else
+    - @result.each do |result|
+      - if result.class.name == "Question"
+        p= link_to result.title, question_path(result)
+
+      - elsif result.class.name == "Answer"
+        p= link_to result.question.title, question_path(result.question)
+
+      - elsif result.class.name == "Comment"
+        - if result.commentable.class.name == "Answer"
+          = link_to result.commentable.body, question_path(result.commentable.question)
+        - else
+          = link_to result.commentable.title, question_path(result.commentable)
+
+      - elsif result.class.name == "User"
+        p= result.email

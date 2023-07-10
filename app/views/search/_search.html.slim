@@ -1,0 +1,18 @@
+= form_with url: "/search", method: :get, remote: :true do |f|
+  = f.label :query, "Search for:"
+  = f.search_field :query
+  = f.submit "Search"
+
+  p
+
+  = f.radio_button :scope, 'question'
+  = f.label :scope_question, 'Question'
+
+  = f.radio_button :scope, 'answer'
+  = f.label :scope_answer, 'Answer'
+
+  = f.radio_button :scope, 'user'
+  = f.label :scope_user, 'User'
+
+  = f.radio_button :scope, 'comment'
+  = f.label :scope_comment, 'Comment'
