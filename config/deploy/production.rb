@@ -5,9 +5,6 @@
 
 server "89.108.81.99", user: "deployer", roles: %w{app db web}, primary: true
 set :rails_env, :production
-# Postgresql setup
-set :pg_username, 'postgres'
-set :pg_ask_for_password, true
 
 
 # Custom SSH Options
