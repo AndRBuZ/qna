@@ -1,11 +1,12 @@
-.question
-  = render 'question_show'
+- cache @question do 
+  .question
+    = render 'question_show'
 
-.answers
-  = render @question.answers.sort_by_best
+  .answers
+    = render @question.answers.sort_by_best
 
-  .answer-errors
-    = render 'shared/errors', resource: @answer
+    .answer-errors
+      = render 'shared/errors', resource: @answer
 
 = render 'answers/form'
 
