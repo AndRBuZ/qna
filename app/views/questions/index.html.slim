@@ -1,6 +1,7 @@
-.questions
-  h1= 'Questions'
+- cache collection_cache_key_for :question do 
+  .questions
+    h1= 'Questions'
 
-  =render @questions
+    =render @questions
 
-p= link_to 'Ask question', new_question_path
+  p= link_to 'Ask question', new_question_path
